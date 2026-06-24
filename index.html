@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOICT Community Blog Portal</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">SOICT<span> Community</span></div>
+        <nav class="nav-links" id="navLinks">
+            </nav>
+    </header>
+
+    <section class="hero-section">
+        <h1>Welcome to Our Community Blog</h1>
+        <p>Share your thoughts, ideas, and stories with the world.</p>
+        <div class="search-box">
+            <input type="text" id="searchBar" placeholder="Search blogs by title...">
+        </div>
+    </section>
+
+    <main class="container">
+        <div class="blog-grid" id="blogGrid">
+            </div>
+    </main>
+
+    <div class="modal-overlay" id="postModal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Create New Blog Post</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="createPostForm">
+                <div class="input-group">
+                    <label for="postTitle">Blog Title</label>
+                    <input type="text" id="postTitle" placeholder="Enter an catchy title" required>
+                </div>
+                <div class="input-group">
+                    <label for="postImage">Image URL</label>
+                    <input type="url" id="postImage" placeholder="Paste image link (e.g. https://images.unsplash.com/...)" required>
+                </div>
+                <div class="input-group">
+                    <label for="postContent">Blog Content</label>
+                    <textarea id="postContent" rows="6" placeholder="Write your content here..." required></textarea>
+                </div>
+                <button type="submit" class="auth-btn">Publish Blog</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
