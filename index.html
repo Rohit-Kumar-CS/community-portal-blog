@@ -9,13 +9,15 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
 </head>
 <body>
 
     <header class="navbar">
         <div class="logo">SOICT<span> Community</span></div>
         <nav class="nav-links" id="navLinks">
-            </nav>
+        </nav>
     </header>
 
     <section class="hero-section">
@@ -28,7 +30,7 @@
 
     <main class="container">
         <div class="blog-grid" id="blogGrid">
-            </div>
+        </div>
     </main>
 
     <div class="modal-overlay" id="postModal">
@@ -46,15 +48,19 @@
                     <label for="postImage">Image URL</label>
                     <input type="url" id="postImage" placeholder="Paste image link (e.g. https://images.unsplash.com/...)" required>
                 </div>
+                
                 <div class="input-group">
-                    <label for="postContent">Blog Content</label>
-                    <textarea id="postContent" rows="6" placeholder="Write your content here..." required></textarea>
+                    <label>Blog Content</label>
+                    <div id="editor" style="height: 220px; background: white; border-radius: 0 0 6px 6px;"></div>
                 </div>
+                
                 <button type="submit" class="auth-btn">Publish Blog</button>
             </form>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    
     <script src="app.js"></script>
 </body>
 </html>

@@ -22,6 +22,25 @@ const createPostForm = document.getElementById('createPostForm');
 
 let allBlogs = []; // Saare blogs store karne ke liye global array
 let currentUserName = "Guest";
+let quill; // Quill global variable setup
+
+// --- QUILL TEXT EDITOR INITIALIZATION ---
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.getElementById('editor')) {
+        quill = new Quill('#editor', {
+            theme: 'snow',
+            placeholder: 'Write your rich content here...',
+            modules: {
+                toolbar: [
+                    [{ 'header': [1, 2, 3, false] }],
+                    ['bold', 'italic', 'underline'],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    ['clean']
+                ]
+            }
+        });
+    }
+});
 
 // --- 1. AUTH STATE CHECK (Navbar Update) ---
 auth.onAuthStateChanged((user) => {
@@ -73,6 +92,11 @@ function displayBlogs(blogsArray) {
     }
 
     blogsArray.forEach((blog) => {
+        // Home page card strip ke liye HTML tags ko remove karke clean preview text banana
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = blog.content;
+        const cleanText = tempDiv.textContent || tempDiv.innerText || "";
+
         const card = document.createElement('article');
         card.classList.add('blog-card');
         card.innerHTML = `
@@ -80,7 +104,7 @@ function displayBlogs(blogsArray) {
                 <img src="${blog.image}" alt="${blog.title}" class="blog-img">
                 <div class="blog-card-body">
                     <h2 class="blog-card-title">${blog.title}</h2>
-                    <p class="blog-card-text">${blog.content.substring(0, 120)}...</p>
+                    <p class="blog-card-text">${cleanText.substring(0, 120)}...</p>
                     <div class="blog-meta">
                         <span>By ${blog.author}</span>
                         <span>${blog.date}</span>
@@ -99,7 +123,15 @@ if (createPostForm) {
 
         const title = document.getElementById('postTitle').value;
         const image = document.getElementById('postImage').value;
-        const content = document.getElementById('postContent').value;
+        
+        // Quill editor se full HTML formatted block extraction
+        const content = quill.root.innerHTML; 
+
+        // Ek validation check ki editor khali toh nahi hai
+        if (quill.getText().trim().length === 0) {
+            alert("Please write some content before publishing!");
+            return;
+        }
         
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const date = new Date().toLocaleDateString('en-US', options);
@@ -116,8 +148,9 @@ if (createPostForm) {
         // Firestore me data push karein
         db.collection("blogs").add(newPost)
             .then(() => {
-                alert('Blog Published Online!');
+                alert('Blog Published Online with Rich Formatting!');
                 createPostForm.reset();
+                quill.setContents([]); // Submit hone ke baad editor clear karna
                 postModal.classList.remove('active');
             })
             .catch((error) => alert("Error: " + error.message));

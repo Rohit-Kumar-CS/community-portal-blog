@@ -327,11 +327,9 @@ body {
     border-color: #007bff;
 }
 
-
-
 /* --- BLOG DETAIL PAGE STYLES --- */
 .detail-container {
-    max-width: 800px; /* Detail page thoda narrow hota hai padhne me aasan banane ke liye */
+    max-width: 800px; 
     margin: 30px auto;
 }
 
@@ -363,14 +361,39 @@ body {
     margin-bottom: 30px;
 }
 
-.detail-text {
-    font-size: 18px;
-    color: #333;
-    line-height: 1.8;
-}
-
 .loading {
     text-align: center;
     font-size: 18px;
     color: #777;
+}
+
+/* --- FIXED BLOG CONTENT STYLES (NEW UPDATED CONTENT SECTION) --- */
+.detail-text {
+    font-size: 18px;
+    color: #333333;
+    line-height: 1.8;
+}
+
+/* Blog content ke andar aane wali headings ke liye styles */
+.detail-text h1, .detail-text h2, .detail-text h3 {
+    color: #111111;
+    margin-top: 28px;
+    margin-bottom: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.detail-text h1 { font-size: 26px; }
+.detail-text h2 { font-size: 22px; }
+.detail-text h3 { font-size: 19px; }
+
+/* Paragraphs me proper gap maintain karne ke liye */
+.detail-text p {
+    margin-bottom: 20px;
+}
+
+/* Agar koi bullet list/points aate hain toh unki details */
+.detail-text ul, .detail-text ol {
+    margin-left: 24px;
+    margin-bottom: 20px;
 }
