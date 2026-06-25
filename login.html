@@ -1,48 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Community Portal</title>
+    <title>SOICT Portal - Authentication</title>
     <link rel="stylesheet" href="style.css">
 
-    <!-- Firebase Scripts (Yeh zaroori hain) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 </head>
-
 <body>
-    <div class="auth-container">
-        <div class="auth-box">
-            <h2>Welcome Back</h2>
-            <p class="auth-subtitle">Login to your account to post blogs</p>
 
-            <form id="loginForm">
-                <div class="input-group">
-                    <label for="loginEmail">Email Address</label>
-                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+    <div class="auth-matrix-wrapper">
+        <div class="auth-panel-left">
+            <div class="auth-branding-area">
+                <div class="brand-vector-logo">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="40" stroke="#FFFFFF" stroke-width="6"/>
+                        <path d="M30 65C45 30 55 30 70 35" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"/>
+                    </svg>
                 </div>
+            </div>
 
-                <div class="input-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
-                </div>
+            <div class="auth-state-box" id="authStateBox">
+                <form id="authCoreForm">
+                    <h2 class="form-matrix-title" id="formTitle">Login</h2>
+                    
+                    <div class="matrix-input-group">
+                        <label for="authEmail">Email</label>
+                        <div class="input-field-wrapper">
+                            <span class="field-icon">✉</span>
+                            <input type="email" id="authEmail" placeholder="hello@soict.email" required>
+                        </div>
+                    </div>
 
-                <button type="submit" class="auth-btn">Login</button>
-                <!-- Login form ke andar login button ke niche ise dalein -->
-                <div class="forgot-password-container" style="margin-top: 15px; text-align: center;">
-                    <a href="#" id="forgotPasswordBtn"
-                        style="color: #4A90E2; text-decoration: none; font-size: 14px;">Forgot Password?</a>
-                </div>
-            </form>
+                    <div class="matrix-input-group">
+                        <label for="authPassword">Password</label>
+                        <div class="input-field-wrapper">
+                            <span class="field-icon">🔑</span>
+                            <input type="password" id="authPassword" placeholder="Your password" required>
+                        </div>
+                    </div>
 
-            <p class="auth-footer">Don't have an account? <a href="register.html">Register here</a></p>
+                    <button type="submit" class="matrix-prime-btn" id="submitBtn">Login</button>
+                    
+                    <p class="matrix-toggle-footer">
+                        <span id="toggleText">Don't have an account?</span> 
+                        <a href="#" id="switchAuthStateBtn">Sign up</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+        <div class="auth-panel-right">
+            <div class="pillar-matrix-canvas">
+                <div class="abstract-pillar link-p1"></div>
+                <div class="abstract-pillar link-p2"></div>
+                <div class="abstract-pillar link-p3"></div>
+            </div>
         </div>
     </div>
 
     <script src="auth.js"></script>
 </body>
-
 </html>

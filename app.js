@@ -92,7 +92,7 @@ function displayBlogs(blogsArray) {
     }
 
     blogsArray.forEach((blog) => {
-        // Home page card strip ke liye HTML tags ko remove karke clean preview text banana
+        // Snippet strip ke liye tags clear out karein
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = blog.content;
         const cleanText = tempDiv.textContent || tempDiv.innerText || "";
@@ -101,10 +101,13 @@ function displayBlogs(blogsArray) {
         card.classList.add('blog-card');
         card.innerHTML = `
             <a href="blog-detail.html?id=${blog.id}" style="text-decoration: none; color: inherit;">
-                <img src="${blog.image}" alt="${blog.title}" class="blog-img">
-                <div class="blog-card-body">
-                    <h2 class="blog-card-title">${blog.title}</h2>
-                    <p class="blog-card-text">${cleanText.substring(0, 120)}...</p>
+                <img src="${blog.image}" alt="${blog.title}" class="blog-img" onerror="this.src='https://placehold.co/600x400?text=No+Image'">
+                <div class="blog-card-overlay">
+                    <h2 class="blog-card-title">
+                        ${blog.title} 
+                        <span class="verified-badge">✓</span>
+                    </h2>
+                    <p class="blog-card-text">${cleanText.substring(0, 75)}...</p>
                     <div class="blog-meta">
                         <span>By ${blog.author}</span>
                         <span>${blog.date}</span>
