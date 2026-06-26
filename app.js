@@ -13,23 +13,65 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+// Browser close karne par automatic logout script (Persistence Layer)
+auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .catch((error) => {
+        console.error("Persistence implementation error:", error.message);
+    });
+
 // DOM Elements
 const blogGrid = document.getElementById('blogGrid');
 const navLinks = document.getElementById('navLinks');
 const searchBar = document.getElementById('searchBar');
 const postModal = document.getElementById('postModal');
 const createPostForm = document.getElementById('createPostForm');
+const closeModalBtn = document.getElementById('closeModalBtn');
 
-let allBlogs = []; // Saare blogs store karne ke liye global array
-let currentUserName = "Guest";
-let quill; // Quill global variable setup
+let allBlogs = []; 
+let currentUserName = "Anonymous";
+let quill; 
 
-// --- QUILL TEXT EDITOR INITIALIZATION ---
+// --- AUTH STATE MONITOR ENGINE ---
+auth.onAuthStateChanged((user) => {
+    const toggleButtonHTML = `
+        <button id="theme-toggle" class="theme-btn">
+            <span class="mode-icon">${document.body.classList.contains('light-mode') ? '🌙' : '☀️'}</span>
+        </button>
+    `;
+
+    if (user) {
+        // 1. User Logged In: Create Post button dikhega, Login button aur Manual Logout hat jayega
+        db.collection("users").doc(user.uid).get().then((doc) => {
+            if (doc.exists) {
+                currentUserName = doc.data().name || "Author";
+            }
+            
+            navLinks.innerHTML = `
+                <button class="nav-btn create-btn" id="openModalBtn">Create Post</button>
+                <span class="welcome-user" style="color: var(--white); font-weight:600;">Hi, ${currentUserName}</span>
+                ${toggleButtonHTML}
+            `;
+            
+            // Listeners attach karein dynamic injection ke baad
+            setupThemeToggleListener();
+            document.getElementById('openModalBtn').addEventListener('click', () => postModal.classList.add('active'));
+        });
+    } else {
+        // 2. User Logged Out / Guest: Sirf Login / Register aur Mode Switcher dikhega
+        navLinks.innerHTML = `
+            <a href="login.html" class="nav-btn login-nav-btn" id="authBtn">Login / Register</a>
+            ${toggleButtonHTML}
+        `;
+        setupThemeToggleListener();
+    }
+});
+
 document.addEventListener("DOMContentLoaded", () => {
+    // Quill Rich Text Editor Setup
     if (document.getElementById('editor')) {
         quill = new Quill('#editor', {
             theme: 'snow',
-            placeholder: 'Write your rich content here...',
+            placeholder: 'Write your content here...',
             modules: {
                 toolbar: [
                     [{ 'header': [1, 2, 3, false] }],
@@ -40,44 +82,33 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    if (closeModalBtn) closeModalBtn.addEventListener('click', () => postModal.classList.remove('active'));
 });
 
-// --- 1. AUTH STATE CHECK (Navbar Update) ---
-auth.onAuthStateChanged((user) => {
-    if (user) {
-        // User logged in hai, uska naam Firestore se nikaalein
-        db.collection("users").doc(user.uid).get().then((doc) => {
-            if (doc.exists) {
-                currentUserName = doc.data().name;
+// Theme Selector Control Listener Function
+function setupThemeToggleListener() {
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const modeIcon = themeToggleBtn.querySelector('.mode-icon');
+            if (document.body.classList.contains('light-mode')) {
+                modeIcon.textContent = '🌙';
+            } else {
+                modeIcon.textContent = '☀️';
             }
-            navLinks.innerHTML = `
-                <span class="welcome-user">Hi, ${currentUserName}</span>
-                <button class="nav-btn create-btn" id="openModalBtn">Create Post</button>
-                <button class="nav-btn logout-btn" id="logoutBtn">Logout</button>
-            `;
-            
-            // Event Listeners for dynamic buttons
-            document.getElementById('openModalBtn').addEventListener('click', () => postModal.classList.add('active'));
-            document.getElementById('logoutBtn').addEventListener('click', () => {
-                auth.signOut().then(() => {
-                    alert("Logged out!");
-                    window.location.reload();
-                });
-            });
         });
-    } else {
-        navLinks.innerHTML = `<a href="login.html" class="nav-btn login-nav-btn">Login / Register</a>`;
     }
-});
+}
 
-// --- 2. FETCH & DISPLAY BLOGS FROM FIRESTORE ---
+// --- FETCH & DISPLAY DATA STREAMS ---
 function fetchBlogs() {
-    // Firestore se blogs collection load karein (newest first)
     db.collection("blogs").orderBy("createdAt", "desc").onSnapshot((snapshot) => {
         allBlogs = [];
         snapshot.forEach((doc) => {
             let blogData = doc.data();
-            blogData.id = doc.id; // Document ki unique ID save karein detail page ke liye
+            blogData.id = doc.id;
             allBlogs.push(blogData);
         });
         displayBlogs(allBlogs);
@@ -85,14 +116,15 @@ function fetchBlogs() {
 }
 
 function displayBlogs(blogsArray) {
+    if (!blogGrid) return;
     blogGrid.innerHTML = "";
+    
     if (blogsArray.length === 0) {
         blogGrid.innerHTML = `<p class="no-blogs">No blogs found.</p>`;
         return;
     }
 
     blogsArray.forEach((blog) => {
-        // Snippet strip ke liye tags clear out karein
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = blog.content;
         const cleanText = tempDiv.textContent || tempDiv.innerText || "";
@@ -109,7 +141,7 @@ function displayBlogs(blogsArray) {
                     </h2>
                     <p class="blog-card-text">${cleanText.substring(0, 75)}...</p>
                     <div class="blog-meta">
-                        <span>By ${blog.author}</span>
+                        <span>By ${blog.author || 'Anonymous'}</span>
                         <span>${blog.date}</span>
                     </div>
                 </div>
@@ -119,18 +151,15 @@ function displayBlogs(blogsArray) {
     });
 }
 
-// --- 3. CREATE NEW BLOG TO FIRESTORE ---
+// --- SUBMIT COMPONENT GENERATION ---
 if (createPostForm) {
     createPostForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
         const title = document.getElementById('postTitle').value;
         const image = document.getElementById('postImage').value;
-        
-        // Quill editor se full HTML formatted block extraction
         const content = quill.root.innerHTML; 
 
-        // Ek validation check ki editor khali toh nahi hai
         if (quill.getText().trim().length === 0) {
             alert("Please write some content before publishing!");
             return;
@@ -143,32 +172,30 @@ if (createPostForm) {
             title: title,
             image: image,
             content: content,
-            author: currentUserName,
+            author: currentUserName, 
             date: date,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp() // Sahi ordering ke liye timestamp
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };
 
-        // Firestore me data push karein
         db.collection("blogs").add(newPost)
             .then(() => {
-                alert('Blog Published Online with Rich Formatting!');
+                alert('Blog Published Successfully!');
                 createPostForm.reset();
-                quill.setContents([]); // Submit hone ke baad editor clear karna
+                quill.setContents([]);
                 postModal.classList.remove('active');
             })
             .catch((error) => alert("Error: " + error.message));
     });
 }
 
-// Search Filter
-searchBar.addEventListener('input', (e) => {
-    const text = e.target.value.toLowerCase();
-    const filtered = allBlogs.filter(blog => blog.title.toLowerCase().includes(text));
-    displayBlogs(filtered);
-});
+// Search Filter Trigger
+if (searchBar) {
+    searchBar.addEventListener('input', (e) => {
+        const text = e.target.value.toLowerCase().trim();
+        const filtered = allBlogs.filter(blog => blog.title.toLowerCase().includes(text));
+        displayBlogs(filtered);
+    });
+}
 
-// Close modal code
-document.getElementById('closeModalBtn').addEventListener('click', () => postModal.classList.remove('active'));
-
-// Load blogs on start
+// Run Fetch Data Stream
 fetchBlogs();
