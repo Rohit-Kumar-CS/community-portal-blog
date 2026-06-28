@@ -28,34 +28,34 @@ const postModal = document.getElementById('postModal');
 const createPostForm = document.getElementById('createPostForm');
 const paginationContainer = document.getElementById('paginationContainer');
 
-let allBlogs = []; 
-let filteredBlogs = []; 
-const blogsPerPage = 9; 
-let currentPage = 1; 
+let allBlogs = [];
+let filteredBlogs = [];
+const blogsPerPage = 9;
+let currentPage = 1;
 let currentUserName = "Author";
 let quill;
 
-// --- 🔐 REAL-TIME AUTH MONITOR & BUTTON SPLITTER ---
-// --- 🔐 REAL-TIME AUTH MONITOR & BUTTON SPLITTER ENGINE ---
+
 // app.js ke andar is state function ko update karein:
 auth.onAuthStateChanged((user) => {
+    const drawerAuthLinks = document.getElementById('drawerAuthLinks');
     if (user) {
         // User logged in hai
         db.collection("users").doc(user.uid).get().then((doc) => {
             if (doc.exists) {
                 currentUserName = doc.data().name;
-                
+
                 // 1. Navbar me sirf User ka naam dikhega (No Logout Button)
                 navLinks.innerHTML = `
                     <span class="user-greeting" style="color: var(--white); font-weight: 500; margin-right: 10px;">Hi, ${currentUserName}</span>
                 `;
-                
+
                 // 2. Search box ke theek upar "Create Blog" button load hoga
                 if (searchActionArea) {
                     searchActionArea.innerHTML = `
                         <button id="openModalBtn" class="nav-btn login-nav-btn" style="width: auto; padding: 8px 16px;">Create Blog</button>
                     `;
-                    
+
                     // Modal trigger listener bind karein
                     document.getElementById('openModalBtn').addEventListener('click', () => {
                         postModal.classList.add('active');
@@ -66,13 +66,13 @@ auth.onAuthStateChanged((user) => {
     } else {
         // User logged out hai
         currentUserName = null;
-        
+
         // Navbar me default actions dikhao
         navLinks.innerHTML = `
             <a href="login.html" class="nav-btn login-nav-btn">Login</a>
             <a href="login.html?mode=register" class="nav-btn register-nav-btn">Register</a>
         `;
-        
+
         // Search container ke upar se button remove karo
         if (searchActionArea) {
             searchActionArea.innerHTML = '';
@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 toolbar: [
                     [{ 'header': [1, 2, 3, false] }],
                     ['bold', 'italic', 'underline'],
-                    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    [{ 'list': 'ordered' }, { 'list': 'bullet' }],
                     ['clean']
                 ]
             }
@@ -113,9 +113,9 @@ function fetchBlogs() {
             blogData.id = doc.id;
             allBlogs.push(blogData);
         });
-        
+
         filteredBlogs = [...allBlogs];
-        currentPage = 1; 
+        currentPage = 1;
         renderBlogPaginationEngine();
     });
 }
@@ -126,7 +126,7 @@ function renderBlogPaginationEngine() {
     const startIndex = (currentPage - 1) * blogsPerPage;
     const endIndex = startIndex + blogsPerPage;
     const currentSlice = filteredBlogs.slice(startIndex, endIndex);
-    
+
     displayBlogs(currentSlice);
     buildPaginationUI(totalPages);
 }
@@ -216,17 +216,17 @@ function buildPaginationUI(totalPages) {
 
 // Firestore blog submission handler
 if (createPostForm) {
-    createPostForm.addEventListener('submit', function(e) {
+    createPostForm.addEventListener('submit', function (e) {
         e.preventDefault();
         const title = document.getElementById('postTitle').value;
         const image = document.getElementById('postImage').value;
-        const content = quill.root.innerHTML; 
+        const content = quill.root.innerHTML;
 
         if (quill.getText().trim().length === 0) {
             alert("Please write some content before publishing!");
             return;
         }
-        
+
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const date = new Date().toLocaleDateString('en-US', options);
 
@@ -234,7 +234,7 @@ if (createPostForm) {
             title: title,
             image: image,
             content: content,
-            author: currentUserName, 
+            author: currentUserName,
             date: date,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         };

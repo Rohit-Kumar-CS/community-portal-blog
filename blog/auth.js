@@ -35,7 +35,7 @@ if (switchAuthStateBtn) {
             submitBtn.textContent = "Sign up";
             toggleText.textContent = "Already have an account?";
             switchAuthStateBtn.textContent = "Login";
-            
+
             // Registration mode me dynamic Name input insert karein
             if (!document.getElementById('authNameGroup')) {
                 const nameFieldHTML = `
@@ -48,7 +48,7 @@ if (switchAuthStateBtn) {
                     </div>
                 `;
                 formTitle.insertAdjacentHTML('afterend', nameFieldHTML);
-                
+
                 // Smooth fade-in presentation delay trigger
                 setTimeout(() => {
                     const group = document.getElementById('authNameGroup');
@@ -61,7 +61,7 @@ if (switchAuthStateBtn) {
             submitBtn.textContent = "Login";
             toggleText.textContent = "Don't have an account?";
             switchAuthStateBtn.textContent = "Sign up";
-            
+
             // Name input ko clear karein login view ke liye
             const nameField = document.getElementById('authNameGroup');
             if (nameField) {
@@ -73,10 +73,10 @@ if (switchAuthStateBtn) {
 
 // --- CENTRAL CORE AUTHENTICATION ROUTER ---
 if (authCoreForm) {
-    authCoreForm.addEventListener('submit', function(e) {
+    authCoreForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
-        const email = document.getElementById('authEmail').value;
+
+        const email = document.getElementById('authEmail').value.trim();
         const password = document.getElementById('authPassword').value;
 
         if (isLoginMode) {
@@ -91,27 +91,29 @@ if (authCoreForm) {
                 });
         } else {
             // --- 2. RUN REGISTER FLOW ---
-            const name = document.getElementById('authName').value;
+            const name = document.getElementById('authName').value.trim();
 
+            // auth.js mein Sign Up wale block ko isse replace karein:
             auth.createUserWithEmailAndPassword(email, password)
                 .then((userCredential) => {
-                    // Firestore cloud records database syncing sequence
-                    return db.collection("users").doc(userCredential.user.uid).set({
-                        name: name,
-                        email: email
+                    const user = userCredential.user;
+
+                    // 🌟 MISSING FIX: Firebase auth profile mein naam update karna
+                    return user.updateProfile({
+                        displayName: name
+                    }).then(() => {
+                        // Ab firestore mein save karein
+                        return db.collection("users").doc(user.uid).set({
+                            name: name,
+                            email: email,
+                            uid: user.uid,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        });
                     });
                 })
                 .then(() => {
-                    alert('Registration Successful! Switching you to login view.');
-                    // User environment clear out aur standard login context par dynamic swap render karein
-                    isLoginMode = true;
-                    formTitle.textContent = "Login";
-                    submitBtn.textContent = "Login";
-                    toggleText.textContent = "Don't have an account?";
-                    switchAuthStateBtn.textContent = "Sign up";
-                    const nameField = document.getElementById('authNameGroup');
-                    if (nameField) nameField.remove();
-                    authCoreForm.reset();
+                    alert("Registration Successful!");
+                    window.location.href = "index.html";
                 })
                 .catch((error) => {
                     alert("Error: " + error.message);
@@ -128,10 +130,10 @@ setTimeout(() => {
         const forgotLinkHTML = `<br><a href="#" id="matrixForgotBtn" style="display:inline-block; margin-top:10px; font-size:11.5px; opacity:0.8;">Forgot Password?</a>`;
         toggleFooter.insertAdjacentHTML('afterend', forgotLinkHTML);
 
-        document.getElementById('matrixForgotBtn').addEventListener('click', function(e) {
+        document.getElementById('matrixForgotBtn').addEventListener('click', function (e) {
             e.preventDefault();
             const email = prompt("Please enter your registered Email ID:");
-            
+
             if (!email) {
                 alert("Email is required to reset password!");
                 return;
@@ -154,15 +156,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Browser ke URL se parameters ko read karein
     const urlParams = new URLSearchParams(window.location.search);
     const mode = urlParams.get('mode');
-    
+
     // 2. Agar mode ki value 'register' milti hai, toh automatically Form layout change karein
     if (mode === 'register') {
         const switchBtn = document.getElementById('switchAuthStateBtn');
-        
+
         // Agar aapki auth.js me toggle variable use ho raha hai ya button click standard hai
         if (switchBtn) {
             // Button ka text check karke screen badle (Sign up mode par throw karein)
-            if (switchBtn.innerText.trim().toLowerCase().includes('sign up') || 
+            if (switchBtn.innerText.trim().toLowerCase().includes('sign up') ||
                 switchBtn.innerText.trim().toLowerCase().includes('register')) {
                 switchBtn.click(); // Automatic trigger click taaki user ko manually na dabana pade
             }
@@ -176,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2. URL parameters check karein (?mode=register wala part)
     const urlParams = new URLSearchParams(window.location.search);
     const mode = urlParams.get('mode');
-    
+
     if (mode === 'register') {
         const switchBtn = document.getElementById('switchAuthStateBtn');
         const nameField = document.getElementById('nameGroup');
@@ -186,8 +188,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (switchBtn) {
             // Agar aapke auth.js me toggle switch automatic button click standard hai:
-            switchBtn.click(); 
-            
+            switchBtn.click();
+
             // Fallback safety fix (Agar click handler abhi ready nahi hua, toh manual layout override)
             if (submitBtn) submitBtn.innerText = "Sign Up";
             if (toggleText) toggleText.innerText = "Already have an account?";
@@ -196,3 +198,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// auth.js ke end mein ye add karein
+auth.onAuthStateChanged((user) => {
+    if (user) {
+        // Agar user login hai aur galti se login.html par hai, toh use index.html bhej do
+        window.location.href = "index.html";
+    }
+});
