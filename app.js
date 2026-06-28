@@ -21,7 +21,6 @@ window.addEventListener('unload', function () {
 
 // Core DOM Element Selectors
 const blogGrid = document.getElementById('blogGrid');
-const navLinks = document.getElementById('navLinks');
 // app.js ke upar check karo jahan selectors hain, aur ye line add/update karo
 const searchActionArea = document.getElementById('searchActionArea');
 const postModal = document.getElementById('postModal');
@@ -36,49 +35,6 @@ let currentUserName = "Author";
 let quill;
 
 
-// app.js ke andar is state function ko update karein:
-auth.onAuthStateChanged((user) => {
-    const drawerAuthLinks = document.getElementById('drawerAuthLinks');
-    if (user) {
-        // User logged in hai
-        db.collection("users").doc(user.uid).get().then((doc) => {
-            if (doc.exists) {
-                currentUserName = doc.data().name;
-
-                // 1. Navbar me sirf User ka naam dikhega (No Logout Button)
-                navLinks.innerHTML = `
-                    <span class="user-greeting" style="color: var(--white); font-weight: 500; margin-right: 10px;">Hi, ${currentUserName}</span>
-                `;
-
-                // 2. Search box ke theek upar "Create Blog" button load hoga
-                if (searchActionArea) {
-                    searchActionArea.innerHTML = `
-                        <button id="openModalBtn" class="nav-btn login-nav-btn" style="width: auto; padding: 8px 16px;">Create Blog</button>
-                    `;
-
-                    // Modal trigger listener bind karein
-                    document.getElementById('openModalBtn').addEventListener('click', () => {
-                        postModal.classList.add('active');
-                    });
-                }
-            }
-        });
-    } else {
-        // User logged out hai
-        currentUserName = null;
-
-        // Navbar me default actions dikhao
-        navLinks.innerHTML = `
-            <a href="login.html" class="nav-btn login-nav-btn">Login</a>
-            <a href="login.html?mode=register" class="nav-btn register-nav-btn">Register</a>
-        `;
-
-        // Search container ke upar se button remove karo
-        if (searchActionArea) {
-            searchActionArea.innerHTML = '';
-        }
-    }
-});
 /* 📍 REPLACE POSITION: app.js ke bottom me search logic ke aas-paas ya function scope ke end me */
 
 

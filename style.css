@@ -15,12 +15,17 @@
 
 /* --- ☀️ PREMIUM LIGHT MODE VARIABLE CONFIGURATION --- */
 body.light-mode {
-    --pure-black: #F5F5F7;       /* Soft matte white background layer */
-    --charcoal: #FFFFFF;         /* Premium pure white for panels, navbars & containers */
-    --dark-gray: #E2E8F0;        /* Industrial sleek grey borders */
-    --white: #0F172A;            /* Ultra high-contrast crisp title elements */
-    --light-gray: #334155;       /* Premium readable text body */
-    
+    --pure-black: #F5F5F7;
+    /* Soft matte white background layer */
+    --charcoal: #FFFFFF;
+    /* Premium pure white for panels, navbars & containers */
+    --dark-gray: #E2E8F0;
+    /* Industrial sleek grey borders */
+    --white: #0F172A;
+    /* Ultra high-contrast crisp title elements */
+    --light-gray: #334155;
+    /* Premium readable text body */
+
     /* Optimized Light Highlights */
     --bright-blue: #0284C7;
     --indigo: #4F46E5;
@@ -68,6 +73,7 @@ body {
 .theme-btn:active {
     transform: scale(0.95);
 }
+
 /* ==========================================================================
    🌐 PREMIUM CORE APP NAVIGATION HEADER (FIXED BLUR MATRIX)
    ========================================================================== */
@@ -78,7 +84,8 @@ body {
     left: 0;
     width: 100%;
     height: 60px;
-    background-color: rgba(255, 255, 255, 0); /* Transparent glass wrapper look */
+    background-color: rgba(255, 255, 255, 0);
+    /* Transparent glass wrapper look */
     /* backdrop-filter: blur(20px); */
     -webkit-backdrop-filter: blur(20px);
     display: flex;
@@ -171,7 +178,8 @@ body {
     color: #FFFFFF !important;
     background: linear-gradient(135deg, var(--indigo), var(--purple));
     padding: 10px 22px;
-    border-radius: 12px; /* Smooth rounded shape framework */
+    border-radius: 12px;
+    /* Smooth rounded shape framework */
     text-decoration: none;
     box-shadow: 0 4px 15px rgba(138, 87, 232, 0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -218,7 +226,8 @@ body.light-mode .navbar {
 }
 
 body.light-mode .navbar.scrolled {
-    background-color: var(--charcoal); /* Resolves to pure white #FFFFFF */
+    background-color: var(--charcoal);
+    /* Resolves to pure white #FFFFFF */
 }
 
 body.light-mode .theme-btn {
@@ -229,34 +238,6 @@ body.light-mode .theme-btn {
 body.light-mode .theme-btn:hover {
     background: rgba(0, 0, 0, 0.08);
 }
-
-/* ==========================================================================
-   📱 MOBILE AND TABLET STRUCTURAL RESPONSIVE LAYOUT BREAKPOINTS
-   ========================================================================== */
-
-@media (max-width: 991px) {
-    .navbar {
-        padding: 0 24px;
-    }
-    
-    /* Center links array safe system hide framework */
-    .nav-links-ul {
-        display: none; /* Mobile Drawer implementation handle karega baki */
-    }
-}
-/* .login-nav-btn {
-    background: var(--indigo);
-    color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(138, 87, 232, 0.3);
-}
-
-.login-nav-btn:hover {
-    color: #FFFFFF;
-    background: var(--purple);
-    border-color: var(--cyan);
-    box-shadow: 0 0 30px rgba(138, 87, 232, 0.5), 0 0 10px rgba(79, 150, 196, 0.3);
-    letter-spacing: 0.3px;
-} */
 
 .create-btn {
     background: linear-gradient(135deg, var(--indigo), var(--purple));
@@ -288,7 +269,7 @@ body.light-mode .theme-btn:hover {
     align-items: center;
     justify-content: space-between;
     position: relative;
-    color: #FFFFFF; 
+    color: #FFFFFF;
     padding: 60px 5%;
     transition: background-image 0.3s ease;
 }
@@ -714,9 +695,17 @@ body.light-mode .abstract-pillar::before {
     background-image: radial-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 0);
 }
 
-.link-p1 { height: 85%; }
-.link-p2 { height: 60%; }
-.link-p3 { height: 90%; }
+.link-p1 {
+    height: 85%;
+}
+
+.link-p2 {
+    height: 60%;
+}
+
+.link-p3 {
+    height: 90%;
+}
 
 .modal-overlay {
     position: fixed;
@@ -907,7 +896,8 @@ body.light-mode .full-blog img {
 
 .full-blog p {
     font-size: 16px;
-    line-height: 1.6; /* Balanced paragraph rendering line height reset */
+    line-height: 1.6;
+    /* Balanced paragraph rendering line height reset */
     color: var(--light-gray);
     margin-bottom: 16px;
     opacity: 0.95;
@@ -955,17 +945,6 @@ body.light-mode .full-blog img {
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        justify-content: center;
-        padding: 15px 20px;
-    }
-
-    .nav-links {
-        width: 100%;
-        justify-content: center;
-        gap: 12px;
-    }
-
     .hero-section {
         flex-direction: column;
         text-align: center;
@@ -986,30 +965,15 @@ body.light-mode .full-blog img {
         width: 100%;
         max-width: 100%;
     }
+
     .blog-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(250px, 1fr));
-    gap: 20px;
-}
+        display: grid;
+        grid-template-columns: repeat(2, minmax(250px, 1fr));
+        gap: 20px;
+    }
 }
 
 @media (max-width: 480px) {
-    .navbar {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
-    }
-
-    .nav-btn {
-        width: 100%;
-        text-align: center;
-    }
-
     .hero-section h1 {
         font-size: 26px;
     }
@@ -1028,10 +992,10 @@ body.light-mode .full-blog img {
     }
 
     .blog-grid {
-    display: grid;
-    grid-template-columns: repeat(1, minmax(250px, 1fr));
-    gap: 20px;
-}
+        display: grid;
+        grid-template-columns: repeat(1, minmax(250px, 1fr));
+        gap: 20px;
+    }
 }
 
 /* --- 📑 CLIENT-SIDE PAGINATION CONTROLS DESIGN --- */
@@ -1117,6 +1081,7 @@ body.light-mode .navbar {
     background: rgba(255, 255, 255, 0.85) !important;
     border-bottom: 1px solid rgba(226, 232, 240, 0.8) !important;
 }
+
 /* --- 🔘 JAVASCRIPT SE INJECT HONE WALE REGISTER BUTTON KA FIX --- */
 #navLinks .nav-btn,
 #navLinks a.nav-btn,
@@ -1124,7 +1089,8 @@ body.light-mode .navbar {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    white-space: nowrap !important; /* 👈 Isse text kabhi tootega nahi */
+    white-space: nowrap !important;
+    /* 👈 Isse text kabhi tootega nahi */
     font-size: 14px !important;
     font-weight: 600 !important;
     padding: 10px 22px !important;
@@ -1150,12 +1116,16 @@ body.light-mode .navbar {
 .search-container {
     display: flex !important;
     flex-direction: column !important;
-    align-items: center !important; /* Center alignment */
+    align-items: center !important;
+    /* Center alignment */
     justify-content: center !important;
     width: 100% !important;
-    max-width: 600px !important; /* Perfect sleek width constraint */
-    margin: 40px auto !important; /* Top-bottom safe distance */
-    gap: 16px !important; /* Button aur input field ke beech ka premium gap */
+    max-width: 600px !important;
+    /* Perfect sleek width constraint */
+    margin: 40px auto !important;
+    /* Top-bottom safe distance */
+    gap: 16px !important;
+    /* Button aur input field ke beech ka premium gap */
     padding: 0 15px !important;
 }
 
@@ -1163,8 +1133,10 @@ body.light-mode .navbar {
 #searchActionArea {
     width: 100% !important;
     display: flex !important;
-    justify-content: center !important; /* Button ko horizontal center karega */
-    margin-bottom: 0 !important; /* Core wrapper gap handling handles this */
+    justify-content: center !important;
+    /* Button ko horizontal center karega */
+    margin-bottom: 0 !important;
+    /* Core wrapper gap handling handles this */
 }
 
 /* "Create Blog" Button specifically modified inside Search area */
@@ -1174,7 +1146,8 @@ body.light-mode .navbar {
     padding: 12px 24px !important;
     font-size: 14px !important;
     font-weight: 600 !important;
-    border-radius: 12px !important; /* Smooth rounded borders */
+    border-radius: 12px !important;
+    /* Smooth rounded borders */
     background: linear-gradient(135deg, var(--indigo), var(--purple)) !important;
     color: #FFFFFF !important;
     border: none !important;
@@ -1191,13 +1164,15 @@ body.light-mode .navbar {
 /* Actual Search input Bar Fix */
 #searchBar {
     width: 70% !important;
-    height: 50px !important; /* Uniform proportional height */
+    height: 50px !important;
+    /* Uniform proportional height */
     padding: 0 20px !important;
     font-size: 15px !important;
     color: var(--white) !important;
     background-color: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-radius: 14px !important; /* Apple minimal rounding */
+    border-radius: 14px !important;
+    /* Apple minimal rounding */
     outline: none !important;
     transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
@@ -1225,7 +1200,7 @@ body.light-mode #searchBar:focus {
 
 /*7. MULTI-COLUMN COMPREHENSIVE FOOTER*/
 
-.container-xl{
+.container-xl {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1239,12 +1214,13 @@ body.light-mode #searchBar:focus {
     background: #1d1d1d;
 }
 
-.logo-b{
+.logo-b {
     height: 5rem;
     width: 5rem;
     margin-top: 20px;
 }
-.logo-area{
+
+.logo-area {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1254,20 +1230,22 @@ body.light-mode #searchBar:focus {
     width: 70%;
 }
 
-.logo-img{
+.logo-img {
     height: 5rem;
 }
+
 .footer-heading {
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     margin-bottom: 24px;
 }
-.footer-links{
+
+.footer-links {
     list-style: none;
     line-height: 2rem;
     text-underline-offset: none;
-    
+
 }
 
 .footer-links a {
@@ -1282,15 +1260,16 @@ body.light-mode #searchBar:focus {
     transform: translateX(4px);
 }
 
-.footer-contact{
+.footer-contact {
     list-style: none;
     line-height: 2rem;
 }
 
-.footer-contact a{
+.footer-contact a {
     color: var(--text-secondary);
     text-decoration: none;
 }
+
 .footer-contact a:hover {
     color: var(--text-primary) !important;
 }
@@ -1321,7 +1300,7 @@ body.light-mode #searchBar:focus {
     transform: translateY(-3px);
 }
 
-.footer-bottom{
+.footer-bottom {
     border-top: 2px solid white;
     width: 100%;
     display: flex;
