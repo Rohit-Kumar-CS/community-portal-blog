@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Detail - SOICT Community Portal</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="logo">SOICT<span> Community</span></div>
+        <nav class="nav-links" id="detailNavLinks" style="display: flex; align-items: center; gap: 15px;">
+            <a href="index.html" class="nav-btn login-nav-btn">Back to Home</a>
+        </nav>
+    </header>
+
+    <main class="container detail-container">
+        <article class="full-blog" id="fullBlogContent">
+            <p class="loading">Loading blog content...</p>
+        </article>
+    </main>
+
+    <script>
+        window.onload = function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const blogId = urlParams.get('id');
+
+            // FIREBASE CONFIGURATION (ROHIT'S REAL CONFIG)
+            const firebaseConfig = {
+                apiKey: "AIzaSyDjNWBilhKpj8RNHjsC5MDXy-ep-Xbs7GQ",
+                authDomain: "community-portal-blog.firebaseapp.com",
+                projectId: "community-portal-blog",
+                storageBucket: "community-portal-blog.firebasestorage.app",
+                messagingSenderId: "1023990335036",
+                appId: "1:1023990335036:web:1d03b00147d61a0feea539",
+                measurementId: "G-N03RZX09YH"
+            };
+
+            firebase.initializeApp(firebaseConfig);
+            const db = firebase.firestore();
+            const fullBlogContent = document.getElementById('fullBlogContent');
+
+            // Firestore se specifically document fetch karein uski dynamic ID se
+            db.collection("blogs").doc(blogId).get().then((doc) => {
+                if (doc.exists) {
+                    const blog = doc.data();
+
+                    // UPDATED LOGIC: Text ko real HTML paragraphs me convert karne ke liye
+                    const formattedContent = blog.content
+                        .split('\n\n') // Double enter marne par naya paragraph banega
+                        .map(para => `<p>${para.replace(/\n/g, '<br>')}</p>`) // Single enter par line break ho jayega
+                        .join('');
+
+                    fullBlogContent.innerHTML = `
+                <h1 class="detail-title">${blog.title}</h1>
+                <div class="detail-meta">
+                    <span>By <strong>${blog.author}</strong></span> | 
+                    <span>Published on ${blog.date}</span>
+                </div>
+                <img src="${blog.image}" alt="${blog.title}" class="detail-img">
+                <div class="detail-text">
+                    ${formattedContent}
+                </div>
+            `;
+                } else {
+                    fullBlogContent.innerHTML = `<h2>Blog not found!</h2><a href="index.html">Back to Home</a>`;
+                }
+            }).catch(err => {
+                fullBlogContent.innerHTML = `<h2>Error loading blog content.</h2>`;
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>

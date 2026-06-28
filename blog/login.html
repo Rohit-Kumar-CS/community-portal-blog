@@ -9,9 +9,9 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
 </head>
 <body>
-
     <div class="auth-matrix-wrapper">
         <div class="auth-panel-left">
             <div class="auth-branding-area">
@@ -24,6 +24,14 @@
                 <form id="authCoreForm">
                     <h2 class="form-matrix-title" id="formTitle">Login</h2>
                     
+                    <div class="matrix-input-group" id="nameGroup" style="display: none;">
+                        <label for="authName">Full Name</label>
+                        <div class="input-field-wrapper">
+                            <span class="field-icon">👤</span>
+                            <input type="text" id="authName" placeholder="Your Name">
+                        </div>
+                    </div>
+
                     <div class="matrix-input-group">
                         <label for="authEmail">Email</label>
                         <div class="input-field-wrapper">

@@ -148,4 +148,51 @@ setTimeout(() => {
     }
 }, 500);
 
+// --- 🔄 AUTOMATIC LOGIN / REGISTER FORM SWITCHER BASED ON URL ---
+// Jab page load hoga, tab ye check karega ki user ne Register dabaya tha ya Login
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Browser ke URL se parameters ko read karein
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+    
+    // 2. Agar mode ki value 'register' milti hai, toh automatically Form layout change karein
+    if (mode === 'register') {
+        const switchBtn = document.getElementById('switchAuthStateBtn');
+        
+        // Agar aapki auth.js me toggle variable use ho raha hai ya button click standard hai
+        if (switchBtn) {
+            // Button ka text check karke screen badle (Sign up mode par throw karein)
+            if (switchBtn.innerText.trim().toLowerCase().includes('sign up') || 
+                switchBtn.innerText.trim().toLowerCase().includes('register')) {
+                switchBtn.click(); // Automatic trigger click taaki user ko manually na dabana pade
+            }
+        }
+    }
+});
+
+
+// --- 🔄 DYNAMIC THEME AND URL REDIRECTION CONTROLLER ---
+document.addEventListener("DOMContentLoaded", () => {
+    // 2. URL parameters check karein (?mode=register wala part)
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+    
+    if (mode === 'register') {
+        const switchBtn = document.getElementById('switchAuthStateBtn');
+        const nameField = document.getElementById('nameGroup');
+        const formTitle = document.getElementById('formTitle');
+        const submitBtn = document.getElementById('submitBtn');
+        const toggleText = document.getElementById('toggleText');
+
+        if (switchBtn) {
+            // Agar aapke auth.js me toggle switch automatic button click standard hai:
+            switchBtn.click(); 
+            
+            // Fallback safety fix (Agar click handler abhi ready nahi hua, toh manual layout override)
+            if (submitBtn) submitBtn.innerText = "Sign Up";
+            if (toggleText) toggleText.innerText = "Already have an account?";
+            if (switchBtn) switchBtn.innerText = "Login";
+        }
+    }
+});
 

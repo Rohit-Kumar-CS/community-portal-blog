@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ITSOC Web Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="site-header fixed-top" id="siteHeader">
+        <div class="container-xl h-100 d-flex align-items-center justify-content-between px-3 px-xl-0">
+
+            <a href="/index.html" class="logo-area d-flex align-items-center gap-2" aria-label="ITSOC Portal Home">
+                <img src="./Assets/UniversityLogo.png" alt="College Logo" class="logo-img">
+                <span class="portal-name font-weight-semibold text-white">ITSOC</span>
+            </a>
+
+            <nav class="desktop-nav d-none d-lg-block" aria-label="Main Navigation">
+                <ul class="nav-list d-flex align-items-center list-unstyled mb-0 gap-4">
+                    <li><a href="#" class="nav-link">Home</a></li>
+                    <li><a href="#" class="nav-link">Information Technology</a></li>
+                    <li><a href="#" class="nav-link">Events</a></li>
+                    <li><a href="#" class="nav-link">Opportunities</a></li>
+                    <li><a href="/blog/index.html" class="nav-link">Blogs</a></li>
+                    <li><a href="#" class="nav-link">Team</a></li>
+                    <li><a href="#" class="nav-link">Resources</a></li>
+                </ul>
+            </nav>
+            <!-- Right Side: Action Buttons -->
+            <div class="header-actions d-none d-lg-flex align-items-center gap-3">
+                <!-- Yeh Theme Toggle Button Add Karein -->
+                <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
+                    <span class="theme-icon-sun">☀️</span>
+                    <span class="theme-icon-moon">🌙</span>
+                </button>
+
+                <a href="/auth/login.html" class="btn-apple-link text-decoration-none">Login</a>
+                <a href="/auth/register.html" class="btn-apple-primary text-decoration-none">Register</a>
+            </div>
+
+            <button class="menu-toggle d-lg-none" id="menuToggle" aria-expanded="false" aria-controls="mobileDrawer"
+                aria-label="Open main menu">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+            </button>
+        </div>
+    </header>
+
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <aside class="mobile-drawer d-flex flex-column d-lg-none" id="mobileDrawer" aria-hidden="true" role="dialog"
+        aria-label="Mobile Navigation Menu">
+        <div class="drawer-header d-flex align-items-center justify-content-between mb-4">
+            <span class="portal-name text-white font-weight-semibold">ITSOC Menu</span>
+            <button class="close-drawer" id="closeDrawer" aria-label="Close main menu">&times;</button>
+        </div>
+        <nav class="mobile-nav flex-grow-1" aria-label="Mobile Main Navigation">
+            <ul class="mobile-nav-list list-unstyled d-flex flex-column gap-3 mb-0">
+                <li><a href="#" class="mobile-link active">Home</a></li>
+                <li><a href="#" class="mobile-link">Information Technology</a></li>
+                <li><a href="#" class="mobile-link">Events</a></li>
+                <li><a href="#" class="mobile-link">Opportunities</a></li>
+                <li><a href="/blog/index.html" class="mobile-link">Blogs</a></li>   
+                <li><a href="#" class="mobile-link">Team</a></li>
+                <li><a href="#" class="mobile-link">Resources</a></li>
+            </ul>
+        </nav>
+        <div class="drawer-actions d-flex flex-column gap-2 mt-auto pt-3">
+            <a href="#" class="btn-apple-link text-center text-decoration-none py-2">Login</a>
+            <a href="#" class="btn-apple-primary text-center text-decoration-none py-2">Register</a>
+        </div>
+    </aside>
+
+    <!-- TEAM SECTION CONTENT -->
+    <section class="info" style="background-color: aqua; height: 50vh;">
+
+    </section>
+
+    <section class="blog-card"  style="background-color: aqua; height: auto;">
+
+    </section>
+
+    <footer class="site-footer">
+        <div class="container-xl">
+            <div class="row gy-5">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <a href="/index.html" class="logo-area d-flex align-items-center gap-2"
+                        aria-label="ITSOC Portal Home">
+                        <img src="./Assets/UniversityLogo.png" alt="College Logo" class="logo-img">
+                        <span class="portal-name font-weight-semibold text-white">ITSOC Portal</span>
+                    </a>
+                    <p class="brand-desc mb-0">Empowering students through technology, innovation, opportunities, and
+                        community.</p>
+
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h3 class="footer-heading text-uppercase">Quick Links</h3>
+                    <ul class="footer-links list-unstyled mb-0 d-flex flex-column gap-2">
+                        <li><a href="#" class="text-decoration-none">Home</a></li>
+                        <li><a href="#" class="text-decoration-none">Information Technology</a></li>
+                        <li><a href="#" class="text-decoration-none">Events</a></li>
+                        <li><a href="#" class="text-decoration-none">Opportunities</a></li>
+                        <li><a href="/blog/index.html" class="text-decoration-none">Blogs</a></li>
+                        <li><a href="#" class="text-decoration-none">Team</a></li>
+                        <li><a href="#" class="text-decoration-none">Resources</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h3 class="footer-heading text-uppercase">Useful Links</h3>
+                    <ul class="footer-links list-unstyled mb-0 d-flex flex-column gap-2">
+                        <li><a href="https://www.gbu.ac.in/" class="text-decoration-none">College Website</a></li>
+                        <li><a href="#" class="text-decoration-none">Student Portal</a></li>
+                        <li><a href="https://www.gbu.ac.in/placements" class="text-decoration-none">Placement Cell</a>
+                        </li>
+                        <li><a href="https://exams.gbu.ac.in/uploads/imp_link/Academic%20Calendar%202025-26.pdf"
+                                class="text-decoration-none">Academic Calendar</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-3">
+                    <h3 class="footer-heading text-uppercase">Contact Us</h3>
+                    <ul class="footer-contact list-unstyled mb-0 d-flex flex-column gap-2">
+                        <li class="d-flex align-items-center gap-2">
+                            <span class="contact-icon text-cyan">✉</span>
+                            <a href="mailto:itsoc@college.edu" class="text-decoration-none">info@gbu.ac.in</a>
+                        </li>
+                        <li class="d-flex align-items-center gap-2">
+                            <span class="contact-icon text-cyan">📞</span>
+                            <a href="tel:+919876543210" class="text-decoration-none">0120-234 4200</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-3">
+                    <h3 class="footer-heading text-uppercase">University Address</h3>
+                    <ul class="footer-contact list-unstyled mb-0 d-flex flex-column gap-2">
+                        <li class="d-flex align-items-start gap-2">
+                            <span>
+                                <!-- GBU Google Maps Link Included -->
+                                <a href="https://maps.google.com/?q=Gautam+Buddha+University+Greater+Noida"
+                                    target="_blank" rel="noopener noreferrer" class="text-decoration-none">
+                                    Gautam Buddha University,<br>
+                                    Yamuna Expressway, Greater Noida,<br>
+                                    Gautam Buddha Nagar, UP - 201312
+                                </a>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h3 class="footer-heading text-uppercase">Follow Us</h3>
+                    <div class="social-links d-flex gap-3">
+                        <a href="https://www.linkedin.com/school/gautam-buddha-university/?originalSubdomain=in"
+                            aria-label="LinkedIn"
+                            class="d-flex align-items-center justify-content-center text-decoration-none">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/gbugrnoida.dic/" aria-label="Facebook"
+                            class="d-flex align-items-center justify-content-center text-decoration-none">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                            </svg>
+                        </a>
+                        <a href="https://x.com/gbugrnoida" aria-label="Instagram"
+                            class="d-flex align-items-center justify-content-center text-decoration-none">
+                            <!-- Modern Official X SVG Icon -->
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.youtube.com/channel/UCOfkhzLuMRTfqSKMFr9LBCA" aria-label="YouTube"
+                            class="d-flex align-items-center justify-content-center text-decoration-none">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom border-top border-secondary-subtle mt-5 pt-4 text-center">
+                <p class="mb-0">&copy; 2026 ITSOC Portal. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
