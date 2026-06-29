@@ -150,25 +150,33 @@ setTimeout(() => {
     }
 }, 500);
 
-// --- 🔄 AUTOMATIC LOGIN / REGISTER FORM SWITCHER BASED ON URL ---
-// Jab page load hoga, tab ye check karega ki user ne Register dabaya tha ya Login
+// --- ⚙️ DYNAMIC URL MODE CHECKER (FIX FOR REGISTER BUTTON) ---
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Browser ke URL se parameters ko read karein
+    // 1. URL se parameters check karein (?mode=register)
     const urlParams = new URLSearchParams(window.location.search);
     const mode = urlParams.get('mode');
 
-    // 2. Agar mode ki value 'register' milti hai, toh automatically Form layout change karein
-    if (mode === 'register') {
-        const switchBtn = document.getElementById('switchAuthStateBtn');
+    // 2. Saare DOM elements ko safely access karein
+    const switchBtn = document.getElementById('switchAuthStateBtn');
+    const nameField = document.getElementById('nameGroup');
+    const dynamicNameGroup = document.getElementById('dynamicNameGroup');
+    const formTitle = document.getElementById('formTitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const toggleText = document.getElementById('toggleText');
 
-        // Agar aapki auth.js me toggle variable use ho raha hai ya button click standard hai
-        if (switchBtn) {
-            // Button ka text check karke screen badle (Sign up mode par throw karein)
-            if (switchBtn.innerText.trim().toLowerCase().includes('sign up') ||
-                switchBtn.innerText.trim().toLowerCase().includes('register')) {
-                switchBtn.click(); // Automatic trigger click taaki user ko manually na dabana pade
-            }
-        }
+    if (mode === 'register') {
+        // State change controller ko update karein
+        isLoginMode = false;
+
+        // Form layout ko Register state par shift karein
+        if (formTitle) formTitle.innerText = "Register";
+        if (submitBtn) submitBtn.innerText = "Sign Up";
+        if (toggleText) toggleText.innerText = "Already have an account?";
+        if (switchBtn) switchBtn.innerText = "Login";
+        
+        // Name field container ko properly toggle karein (Donon possible combinations safe rakhne ke liye)
+        if (nameField) nameField.style.display = 'block';
+        if (dynamicNameGroup) dynamicNameGroup.style.display = 'block';
     }
 });
 
