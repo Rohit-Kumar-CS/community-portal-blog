@@ -14,253 +14,262 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
 
 
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
-<style>
-    /* Desktop standard responsive navigation dashboard rules (NOW TRANSPARENT) */
-    .navbar-custom {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        height: 70px !important; 
-        /* 🌟 Transparent Background Layer with Glass Effect */
-        background-color: rgba(27, 27, 31, 0) !important; 
-        -webkit-backdrop-filter: blur(240px) !important;
-        backdrop-filter: blur(20px) !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        padding: 0 40px !important;
-        z-index: 99999 !important;
-        box-sizing: border-box !important;
-        /* Sleek border matching the transparent look */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-    }
-
-    /* Brand Logo Framework Setup (Left Balance) */
-    .logo-custom {
-        font-size: 22px !important;
-        font-weight: 700 !important;
-        color: var(--white, #FFFFFF) !important;
-        letter-spacing: -0.5px !important;
-        cursor: pointer !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 4px !important;
-        flex: 1 !important; /* Left side block fixed constraint */
-    }
-    
-    .logo-custom span {
-        font-weight: 700 !important;
-        background: linear-gradient(135deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
-        -webkit-background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-    }
-
-    /* 🎯 100% FIXED ABSOLUTE CENTER FOR LINKS */
-    .nav-links-custom-ul {
-        display: flex !important;
-        list-style: none !important;
-        gap: 32px !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        align-items: center !important;
-        justify-content: center !important; 
-        flex: 3 !important; /* Pure centering hold */
-        text-align: center !important;
-    }
-
-    .nav-link-custom-item {
-        font-size: 15px !important;
-        font-weight: 500 !important;
-        color: var(--light-gray, #E0DFE3) !important;
-        text-decoration: none !important;
-        position: relative !important;
-        padding: 8px 0 !important;
-        white-space: nowrap !important;
-        transition: color 0.25s ease !important;
-    }
-
-    /* 🌊 Dynamic Smooth Premium Underline Hover Transition */
-    .nav-link-custom-item::after {
-        content: '' !important;
-        position: absolute !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        width: 0 !important;
-        height: 2px !important;
-        background: linear-gradient(90deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
-        border-radius: 2px !important;
-        transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-    }
-
-    .nav-link-custom-item:hover {
-        color: var(--white, #FFFFFF) !important;
-    }
-
-    .nav-link-custom-item:hover::after {
-        width: 100% !important;
-    }
-
-    /* Dynamic Button Panel Layout Align (Right Balance) */
-    .dynamic-auth-container {
-        display: flex !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        gap: 20px !important;
-        flex: 1 !important; /* Right side block fixed constraint */
-        list-style: none !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    /* Hamburger Menu Specs */
-    .menu-toggle-custom {
-        display: none !important; 
-        font-size: 30px !important;
-        cursor: pointer !important;
-        color: var(--white, #FFFFFF) !important;
-        user-select: none !important;
-    }
-
-    /* 🔐 PREMIUM MATTE RADIAL GRADIENT BUTTON CODES */
-    .nav-custom-btn {
-        font-size: 14px !important;
-        font-weight: 600 !important;
-        padding: 10px 22px !important;
-        border-radius: 12px !important; 
-        cursor: pointer !important;
-        text-decoration: none !important;
-        display: inline-block !important;
-        transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
-    }
-
-    /* Gradient Glowing Action Buttons */
-    .btn-create-blog, .btn-register-custom {
-        background: linear-gradient(135deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
-        color: #FFFFFF !important;
-        border: none !important;
-        box-shadow: 0 4px 15px rgba(138, 87, 232, 0.2) !important;
-    }
-
-    .btn-create-blog:hover, .btn-register-custom:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 6px 20px rgba(138, 87, 232, 0.35) !important;
-    }
-
-    /* Sleek Transparent Active Frame Border Button for Login */
-    .btn-login-custom {
-        background: rgba(255, 255, 255, 0.05) !important;
-        border: 1px solid rgba(255, 255, 255, 0.1) !important;
-        color: var(--white, #FFFFFF) !important;
-        box-shadow: none !important;
-    }
-
-    .btn-login-custom:hover {
-        background: rgba(255, 255, 255, 0.12) !important;
-        border-color: var(--purple, #8A57E8) !important;
-        transform: scale(1.05) !important;
-    }
-
-    /* Solid Danger block for quick logout response */
-    .btn-logout-custom {
-        background: #ff4757 !important;
-        color: #FFFFFF !important;
-        border: none !important;
-    }
-    .btn-logout-custom:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3) !important;
-    }
-
-    .nav-custom-btn:active {
-        transform: translateY(0) !important;
-    }
-
-    /* 📱 RESPONSIVE ADAPTABILITY MATRIX FOR MOBILE ENGINES */
-    @media (max-width: 768px) {
-        .logo-custom {
-            flex: initial !important;
-        }
-
-        .menu-toggle-custom {
-            display: block !important;
-        }
-
-        .nav-links-custom-ul {
-            display: none !important; 
-            flex-direction: column !important;
-            position: absolute !important;
-            top: 100% !important; 
+    <style>
+        /* Desktop standard responsive navigation dashboard rules (NOW TRANSPARENT) */
+        .navbar-custom {
+            position: fixed !important;
+            top: 0 !important;
             left: 0 !important;
             width: 100% !important;
-            background-color: var(--charcoal, #1B1B1F) !important; 
-            padding: 20px !important;
-            box-sizing: border-box !important;
-            border-bottom: 3px solid var(--purple, #8A57E8) !important; 
-            z-index: 99999 !important;
-            gap: 10px !important; 
-            align-items: flex-start !important;
-            flex: initial !important;
-        }
-
-        .nav-links-custom-ul.active-show {
+            height: 70px !important;
+            /* 🌟 Transparent Background Layer with Glass Effect */
+            background-color: rgba(27, 27, 31, 0) !important;
+            -webkit-backdrop-filter: blur(240px) !important;
+            backdrop-filter: blur(20px) !important;
             display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 0 40px !important;
+            z-index: 99999 !important;
+            box-sizing: border-box !important;
+            /* Sleek border matching the transparent look */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
         }
 
-        .nav-links-custom-ul li {
-            width: 100% !important;
-            display: block !important;
+        /* Brand Logo Framework Setup (Left Balance) */
+        .logo-custom {
+            font-size: 22px !important;
+            font-weight: 700 !important;
+            color: var(--white, #FFFFFF) !important;
+            letter-spacing: -0.5px !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            flex: 1 !important;
+            /* Left side block fixed constraint */
+        }
+
+        .logo-custom span {
+            font-weight: 700 !important;
+            background: linear-gradient(135deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+
+        /* 🎯 100% FIXED ABSOLUTE CENTER FOR LINKS */
+        .nav-links-custom-ul {
+            display: flex !important;
+            list-style: none !important;
+            gap: 32px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            align-items: center !important;
+            justify-content: center !important;
+            flex: 3 !important;
+            /* Pure centering hold */
+            text-align: center !important;
         }
 
         .nav-link-custom-item {
-            display: block !important;
-            padding: 12px 10px !important;
-            font-size: 16px !important;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-        }
-        
-        .nav-link-custom-item::after {
-            display: none !important; 
+            font-size: 15px !important;
+            font-weight: 500 !important;
+            color: var(--light-gray, #E0DFE3) !important;
+            text-decoration: none !important;
+            position: relative !important;
+            padding: 8px 0 !important;
+            white-space: nowrap !important;
+            transition: color 0.25s ease !important;
         }
 
+        /* 🌊 Dynamic Smooth Premium Underline Hover Transition */
+        .nav-link-custom-item::after {
+            content: '' !important;
+            position: absolute !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            width: 0 !important;
+            height: 2px !important;
+            background: linear-gradient(90deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
+            border-radius: 2px !important;
+            transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        }
+
+        .nav-link-custom-item:hover {
+            color: var(--white, #FFFFFF) !important;
+        }
+
+        .nav-link-custom-item:hover::after {
+            width: 100% !important;
+        }
+
+        /* Dynamic Button Panel Layout Align (Right Balance) */
         .dynamic-auth-container {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-            gap: 12px !important;
-            padding: 10px !important;
-            width: 100% !important;
-            flex: initial !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: flex-end !important;
+            gap: 20px !important;
+            flex: 1 !important;
+            /* Right side block fixed constraint */
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
+
+        /* Hamburger Menu Specs */
+        .menu-toggle-custom {
+            display: none !important;
+            font-size: 30px !important;
+            cursor: pointer !important;
+            color: var(--white, #FFFFFF) !important;
+            user-select: none !important;
+        }
+
+        /* 🔐 PREMIUM MATTE RADIAL GRADIENT BUTTON CODES */
         .nav-custom-btn {
-            width: 100% !important;
-            text-align: center !important;
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            padding: 10px 22px !important;
+            border-radius: 12px !important;
+            cursor: pointer !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
         }
-    }
-</style>
+
+        /* Gradient Glowing Action Buttons */
+        .btn-create-blog,
+        .btn-register-custom {
+            background: linear-gradient(135deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
+            color: #FFFFFF !important;
+            border: none !important;
+            box-shadow: 0 4px 15px rgba(138, 87, 232, 0.2) !important;
+        }
+
+        .btn-create-blog:hover,
+        .btn-register-custom:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(138, 87, 232, 0.35) !important;
+        }
+
+        /* Sleek Transparent Active Frame Border Button for Login */
+        .btn-login-custom {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: var(--white, #FFFFFF) !important;
+            box-shadow: none !important;
+        }
+
+        .btn-login-custom:hover {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: var(--purple, #8A57E8) !important;
+            transform: scale(1.05) !important;
+        }
+
+        /* Solid Danger block for quick logout response */
+        .btn-logout-custom {
+            background: #ff4757 !important;
+            color: #FFFFFF !important;
+            border: none !important;
+        }
+
+        .btn-logout-custom:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3) !important;
+        }
+
+        .nav-custom-btn:active {
+            transform: translateY(0) !important;
+        }
+
+        /* 📱 RESPONSIVE ADAPTABILITY MATRIX FOR MOBILE ENGINES */
+        @media (max-width: 768px) {
+            .logo-custom {
+                flex: initial !important;
+            }
+
+            .menu-toggle-custom {
+                display: block !important;
+            }
+
+            .nav-links-custom-ul {
+                display: none !important;
+                flex-direction: column !important;
+                position: absolute !important;
+                top: 100% !important;
+                right: 0 !important;
+                width: 60% !important;
+                background-color: var(--charcoal, #1B1B1F) !important;
+                padding: 20px !important;
+                box-sizing: border-box !important;
+                border-bottom: 3px solid var(--purple, #8A57E8) !important;
+                z-index: 99999 !important;
+                gap: 10px !important;
+                align-items: flex-start !important;
+                flex: initial !important;
+                border-radius: 1rem;
+            }
+
+            .nav-links-custom-ul.active-show {
+                display: flex !important;
+            }
+
+            .nav-links-custom-ul li {
+                width: 100% !important;
+                display: block !important;
+            }
+
+            .nav-link-custom-item {
+                display: block !important;
+                padding: 12px 10px !important;
+                font-size: 16px !important;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+            }
+
+            .nav-link-custom-item::after {
+                display: none !important;
+            }
+
+            .dynamic-auth-container {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 12px !important;
+                padding: 10px !important;
+                width: 100% !important;
+                flex: initial !important;
+            }
+
+            .nav-custom-btn {
+                width: 100% !important;
+                text-align: center !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
- <header class="navbar-custom">
-    <div class="logo-custom">SOICT<span> Community</span></div>
+    <header class="navbar-custom">
+        <div class="logo-custom">SOICT<span> Community</span></div>
 
-    <div class="menu-toggle-custom" id="menuToggleCustom">☰</div>
+        <div class="menu-toggle-custom" id="menuToggleCustom">☰</div>
 
-    <ul class="nav-links-custom-ul" id="navLinksCustom">
-        <li><a href="/team-section.html" class="nav-link-custom-item">Home</a></li>
-        <li><a href="#" class="nav-link-custom-item">Information Technology</a></li>
-        <li><a href="#" class="nav-link-custom-item">Events</a></li>
-        <li><a href="#" class="nav-link-custom-item">Opportunities</a></li>
-        <li><a href="#" class="nav-link-custom-item">Blogs</a></li>
-        <li><a href="#" class="nav-link-custom-item">Team</a></li>
-        <li><a href="#" class="nav-link-custom-item">Resources</a></li>
-        
-        <li id="dynamicAuthArea" class="dynamic-auth-container"></li>
-    </ul>
-</header>
+        <ul class="nav-links-custom-ul" id="navLinksCustom">
+            <li><a href="/team-section.html" class="nav-link-custom-item">Home</a></li>
+            <li><a href="#" class="nav-link-custom-item">Information Technology</a></li>
+            <li><a href="#" class="nav-link-custom-item">Events</a></li>
+            <li><a href="#" class="nav-link-custom-item">Opportunities</a></li>
+            <li><a href="#" class="nav-link-custom-item">Blogs</a></li>
+            <li><a href="#" class="nav-link-custom-item">Team</a></li>
+            <li><a href="#" class="nav-link-custom-item">Resources</a></li>
+
+            <li id="dynamicAuthArea" class="dynamic-auth-container"></li>
+        </ul>
+    </header>
 
     <section class="hero-section">
         <div class="hero-content">
@@ -305,9 +314,8 @@
                     <input type="url" id="postImage" placeholder="Paste image link..." required>
                 </div>
 
-                <div class="input-group">
-                    <label>Blog Content</label>
-                    <div id="editor" style="height: 220px; background: white; border-radius: 0 0 6px 6px;"></div>
+                <div id="textContentContainer">
+                    <div id="editor" style="height: 150px;"></div>
                 </div>
 
                 <button type="submit" class="auth-btn">Publish Blog</button>
@@ -427,81 +435,81 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
-    <script src="app.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuToggleCustom = document.getElementById('menuToggleCustom');
-        const navLinksCustom = document.getElementById('navLinksCustom');
+   <script src="app.js?v=1"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggleCustom = document.getElementById('menuToggleCustom');
+            const navLinksCustom = document.getElementById('navLinksCustom');
 
-        // 1. Mobile Dropdown Engine Trigger
-        if (menuToggleCustom && navLinksCustom) {
-            menuToggleCustom.addEventListener('click', (e) => {
-                e.stopPropagation(); 
-                navLinksCustom.classList.toggle('active-show');
-            });
+            // 1. Mobile Dropdown Engine Trigger
+            if (menuToggleCustom && navLinksCustom) {
+                menuToggleCustom.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    navLinksCustom.classList.toggle('active-show');
+                });
 
-            document.addEventListener('click', (e) => {
-                if (!navLinksCustom.contains(e.target) && e.target !== menuToggleCustom) {
-                    navLinksCustom.classList.remove('active-show');
-                }
-            });
-        }
+                document.addEventListener('click', (e) => {
+                    if (!navLinksCustom.contains(e.target) && e.target !== menuToggleCustom) {
+                        navLinksCustom.classList.remove('active-show');
+                    }
+                });
+            }
 
-        // 2. Real-Time Firebase Auth Syncer Engine
-        if (typeof auth !== 'undefined') {
-            auth.onAuthStateChanged((user) => {
-                const dynamicAuthArea = document.getElementById('dynamicAuthArea');
-                const searchAreaCreateBlogContainer = document.getElementById('searchAreaCreateBlogContainer');
+            // 2. Real-Time Firebase Auth Syncer Engine
+            if (typeof auth !== 'undefined') {
+                auth.onAuthStateChanged((user) => {
+                    const dynamicAuthArea = document.getElementById('dynamicAuthArea');
+                    const searchAreaCreateBlogContainer = document.getElementById('searchAreaCreateBlogContainer');
 
-                if (user) {
-                    // 🔓 USER LOGGED IN VIEW STATE
-                    if (dynamicAuthArea) {
-                        dynamicAuthArea.innerHTML = `
+                    if (user) {
+                        // 🔓 USER LOGGED IN VIEW STATE
+                        if (dynamicAuthArea) {
+                            dynamicAuthArea.innerHTML = `
                             <button class="nav-custom-btn btn-logout-custom" id="headerLogoutBtn">Logout</button>
                         `;
-                    }
+                        }
 
-                    // Render premium button straight above search engine input box
-                    if (searchAreaCreateBlogContainer) {
-                        searchAreaCreateBlogContainer.innerHTML = `
+                        // Render premium button straight above search engine input box
+                        if (searchAreaCreateBlogContainer) {
+                            searchAreaCreateBlogContainer.innerHTML = `
                             <button class="nav-custom-btn btn-create-blog" id="headerCreatePostBtn" style="margin-bottom: 5px;">Create Blog</button>
                         `;
 
-                        document.getElementById('headerCreatePostBtn').addEventListener('click', () => {
-                            const mainModal = document.getElementById('postModal');
-                            if (mainModal) mainModal.classList.add('active');
-                        });
-                    }
-
-                    // Sign-out action link bind
-                    const logoutBtn = document.getElementById('headerLogoutBtn');
-                    if (logoutBtn) {
-                        logoutBtn.addEventListener('click', () => {
-                            auth.signOut().then(() => {
-                                window.location.reload();
+                            document.getElementById('headerCreatePostBtn').addEventListener('click', () => {
+                                const mainModal = document.getElementById('postModal');
+                                if (mainModal) mainModal.classList.add('active');
                             });
-                        });
-                    }
+                        }
 
-                } else {
-                    // 🔒 GUEST LOGGED OUT VIEW STATE
-                    if (dynamicAuthArea) {
-                        dynamicAuthArea.innerHTML = `
+                        // Sign-out action link bind
+                        const logoutBtn = document.getElementById('headerLogoutBtn');
+                        if (logoutBtn) {
+                            logoutBtn.addEventListener('click', () => {
+                                auth.signOut().then(() => {
+                                    window.location.reload();
+                                });
+                            });
+                        }
+
+                    } else {
+                        // 🔒 GUEST LOGGED OUT VIEW STATE
+                        if (dynamicAuthArea) {
+                            dynamicAuthArea.innerHTML = `
                             <a href="login.html" class="nav-custom-btn btn-login-custom">Login</a>
                             <a href="login.html?mode=register" class="nav-custom-btn btn-register-custom">Register</a>
                         `;
-                    }
+                        }
 
-                    if (searchAreaCreateBlogContainer) {
-                        searchAreaCreateBlogContainer.innerHTML = `
+                        if (searchAreaCreateBlogContainer) {
+                            searchAreaCreateBlogContainer.innerHTML = `
                             <p style="color: var(--light-gray, #E0DFE3); font-size: 14px;">Please login to create a new blog post.</p>
                         `;
+                        }
                     }
-                }
-            });
-        }
-    });
-</script>
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

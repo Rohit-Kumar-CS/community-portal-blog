@@ -9,9 +9,14 @@ const firebaseConfig = {
     measurementId: "G-N03RZX09YH"
 };
 
+// --- FIREBASE INITIALIZATION AREA ---
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
+
+// 🔥 YEH LINE ADD KARO taaki app.js ko Storage ka configuration mil sake
+const storage = firebase.storage();
+
 
 // --- 🚪 ABSOLUTE AUTOMATIC LOGOUT ON TAB/BROWSER CLOSE ---
 window.addEventListener('unload', function () {
@@ -170,42 +175,64 @@ function buildPaginationUI(totalPages) {
     }
 }
 
-// Firestore blog submission handler
+
 if (createPostForm) {
-    createPostForm.addEventListener('submit', function (e) {
+    createPostForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+
         const title = document.getElementById('postTitle').value;
         const image = document.getElementById('postImage').value;
-        const content = quill.root.innerHTML;
+        const content = typeof quill !== 'undefined'
+            ? quill.root.innerHTML
+            : "";
 
-        if (quill.getText().trim().length === 0) {
+        // Validation
+        if (typeof quill !== 'undefined' &&
+            quill.getText().trim().length === 0) {
             alert("Please write some content before publishing!");
             return;
         }
 
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
-        const date = new Date().toLocaleDateString('en-US', options);
-
-        const newPost = {
-            title: title,
-            image: image,
-            content: content,
-            author: currentUserName,
-            date: date,
-            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         };
 
-        db.collection("blogs").add(newPost)
-            .then(() => {
-                alert('Blog Published Successfully!');
-                createPostForm.reset();
+        const date = new Date().toLocaleDateString('en-US', options);
+
+        try {
+
+            const newPost = {
+                title: title,
+                image: image || "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=600",
+                content: content,
+                author: typeof currentUserName !== 'undefined'
+                    ? currentUserName
+                    : "Anonymous User",
+                date: date,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            await db.collection("blogs").add(newPost);
+
+            alert('Blog Published Successfully!');
+
+            createPostForm.reset();
+
+            if (typeof quill !== 'undefined') {
                 quill.setContents([]);
-                postModal.classList.remove('active');
-            })
-            .catch((error) => alert("Publishing error: " + error.message));
+            }
+
+            postModal.classList.remove('active');
+            window.location.reload();
+
+        } catch (error) {
+            console.error("Submission failed:", error);
+            alert("Publishing error: " + error.message);
+        }
     });
 }
-
 // Search field filtering system
 if (searchBar) {
     searchBar.addEventListener('input', (e) => {

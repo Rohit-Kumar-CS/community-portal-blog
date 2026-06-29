@@ -11,6 +11,72 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
 
+    <style>
+   .navbar {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 70px !important;
+            /* 🌟 Transparent Background Layer with Glass Effect */
+            background-color: rgba(27, 27, 31, 0) !important;
+            -webkit-backdrop-filter: blur(240px) !important;
+            backdrop-filter: blur(20px) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            padding: 0 40px !important;
+            z-index: 99999 !important;
+            box-sizing: border-box !important;
+            /* Sleek border matching the transparent look */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+        }
+        .logo {
+            font-size: 22px !important;
+            font-weight: 700 !important;
+            color: var(--white, #FFFFFF) !important;
+            letter-spacing: -0.5px !important;
+            cursor: pointer !important;
+            display: flex !important;
+            align-items: center !important;
+            gap: 4px !important;
+            flex: 1 !important;
+            /* Left side block fixed constraint */
+        }
+
+        .logo span {
+            font-weight: 700 !important;
+            background: linear-gradient(135deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+
+         .nav-btn {
+            font-size: 14px !important;
+            font-weight: 600 !important;
+            padding: 10px 22px !important;
+            border-radius: 12px !important;
+            cursor: pointer !important;
+            text-decoration: none !important;
+            display: inline-block !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+        }
+
+        .login-nav-btn{
+            background: rgba(255, 255, 255, 0.05) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: var(--white, #FFFFFF) !important;
+            box-shadow: none !important;
+        }
+
+        .login-nav-btn:hover {
+            background: rgba(255, 255, 255, 0.12) !important;
+            border-color: var(--purple, #8A57E8) !important;
+            transform: scale(1.05) !important;
+        }
+    </style>
+
 </head>
 
 <body>
