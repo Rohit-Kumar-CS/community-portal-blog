@@ -765,6 +765,11 @@ body.light-mode .full-blog {
     border-color: rgba(226, 232, 240, 0.9);
 }
 
+/* .detail-text p{
+    overflow: hidden;
+    padding: 0;
+} */
+
 .detail-title {
     font-size: 36px;
     color: var(--white);
@@ -796,9 +801,10 @@ body.light-mode .full-blog img {
 .full-blog p {
     font-size: 16px;
     line-height: 1.6;
+    overflow: hidden;
     /* Balanced paragraph rendering line height reset */
     color: var(--light-gray);
-    margin-bottom: 16px;
+    /* margin-bottom: 16px; */
     opacity: 0.95;
 }
 
@@ -1016,23 +1022,6 @@ body.light-mode .navbar {
    🔍 SEARCH CONTAINER & DYNAMIC BUTTON PREMIUM FIX
    ========================================================================== */
 
-/* Main wrapper ko flexible column layout me set kiya */
-.search-container {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    /* Center alignment */
-    justify-content: center !important;
-    width: 100% !important;
-    max-width: 600px !important;
-    /* Perfect sleek width constraint */
-    margin: 40px auto !important;
-    /* Top-bottom safe distance */
-    gap: 16px !important;
-    /* Button aur input field ke beech ka premium gap */
-    padding: 0 15px !important;
-}
-
 /* Dynamic Action Area (Create Blog Button Placement Container) */
 #searchActionArea {
     width: 100% !important;
@@ -1065,26 +1054,26 @@ body.light-mode .navbar {
     box-shadow: 0 6px 20px rgba(138, 87, 232, 0.45) !important;
 }
 
-/* Actual Search input Bar Fix */
+/* --- style.css me badlein --- */
+
+/* Purana (.search-box input) hata kar yeh likhein: */
 #searchBar {
-    width: 75% !important;
-    height: 50px !important;
-    /* Uniform proportional height */
-    padding: 0 20px !important;
-    font-size: 15px !important;
-    background-color: rgba(182, 182, 182, 0.801) !important;
-    border: 1px solid rgba(126, 126, 126, 0.336) !important;
-    border-radius: 14px !important;
-    /* Apple minimal rounding */
-    outline: none !important;
-    transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+    width: 70%;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--white);
+    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
-/* Search bar focus & typing effects */
 #searchBar:focus {
-    box-shadow: 0 0 0 3px rgba(138, 87, 232, 0.15) !important;
+    outline: none;
+    border-color: var(--purple);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 15px rgba(138, 87, 232, 0.2);
 }
-
 /* Light Mode support override stability */
 body.light-mode #searchBar {
     background-color: rgba(0, 0, 0, 0.02) !important;
@@ -1228,7 +1217,7 @@ body.light-mode #searchBar:focus {
     /* 5 Columns Matrix Generation */
     .site-footer .row {
         display: grid;
-        grid-template-columns: 2fr 1.2fr 1.2fr 1.5fr 1.1fr;
+        grid-template-columns: 1fr 1.2fr 1.2fr 1.1fr 1.1fr;
         gap: 24px;
     }
 
@@ -1294,3 +1283,5 @@ body.light-mode #searchBar:focus {
         margin-bottom: 0;
     }
 }
+
+

@@ -13,24 +13,29 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 const db = firebase.firestore();
-
-// 🔥 YEH LINE ADD KARO taaki app.js ko Storage ka configuration mil sake
 const storage = firebase.storage();
 
 
-// --- 🚪 ABSOLUTE AUTOMATIC LOGOUT ON TAB/BROWSER CLOSE ---
-window.addEventListener('unload', function () {
-    // Jaise hi tab ya browser window close hogi, Firebase session tabhi ke tabhi destroy ho jayega
-    auth.signOut();
-});
+const appCheck = firebase.appCheck();
+
+appCheck.activate(
+    "YOUR_RECAPTCHA_SITE_KEY",
+    true
+);
+
+
+auth.setPersistence(firebase.auth.Auth.Persistence.SESSION)
+    .catch((error) => {
+        console.error("Session Persistence Error:", error);
+    });
 
 // Core DOM Element Selectors
 const blogGrid = document.getElementById('blogGrid');
-// app.js ke upar check karo jahan selectors hain, aur ye line add/update karo
 const searchActionArea = document.getElementById('searchActionArea');
-const postModal = document.getElementById('postModal');
-const createPostForm = document.getElementById('createPostForm');
-const paginationContainer = document.getElementById('paginationContainer');
+const searchBar = document.getElementById('searchBar'); //
+const prevPageBtn = document.getElementById('prevPageBtn');
+const nextPageBtn = document.getElementById('nextPageBtn');
+const pageNumberIndicator = document.getElementById('pageNumberIndicator');
 
 let allBlogs = [];
 let filteredBlogs = [];

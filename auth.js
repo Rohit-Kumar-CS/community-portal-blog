@@ -210,6 +210,9 @@ document.addEventListener("DOMContentLoaded", () => {
 auth.onAuthStateChanged((user) => {
     if (user) {
         // Agar user login hai aur galti se login.html par hai, toh use index.html bhej do
-        window.location.href = "index.html";
+         if (window.location.pathname.includes('login.html')) {
+            window.location.href = 'index.html';
+        }
     }
 });
+
