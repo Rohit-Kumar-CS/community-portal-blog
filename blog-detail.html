@@ -17,15 +17,14 @@
             top: 0 !important;
             left: 0 !important;
             width: 100% !important;
-            height: 70px !important;
+            height: 6% !important;
             /* 🌟 Transparent Background Layer with Glass Effect */
             background-color: rgba(27, 27, 31, 0) !important;
-            -webkit-backdrop-filter: blur(240px) !important;
             backdrop-filter: blur(20px) !important;
             display: flex !important;
             align-items: center !important;
             justify-content: space-between !important;
-            padding: 0 40px !important;
+            padding: 0 20px !important;
             z-index: 99999 !important;
             box-sizing: border-box !important;
             /* Sleek border matching the transparent look */
@@ -74,6 +73,31 @@
             background: rgba(255, 255, 255, 0.12) !important;
             border-color: var(--purple, #8A57E8) !important;
             transform: scale(1.05) !important;
+        }
+
+        @media (max-width: 425px) {
+             .logo {
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            color: var(--white, #FFFFFF) !important;
+            letter-spacing: -0.5px !important;
+        }
+
+        .logo span {
+            font-weight: 600 !important;
+            background: linear-gradient(135deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
+            -webkit-background-clip: text !important;
+            -webkit-text-fill-color: transparent !important;
+        }
+ .nav-btn {
+            font-size: 10px !important;
+            font-weight: 600 !important;
+            padding: 10px 22px !important;
+  
+            cursor: pointer !important;
+
+        }
+               
         }
     </style>
 
