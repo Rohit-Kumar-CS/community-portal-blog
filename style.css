@@ -145,7 +145,7 @@ body.light-mode .theme-btn:hover {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 50vh;
+    height: 55vh;
     width: 100%;
     display: flex;
     align-items: center;
@@ -1242,7 +1242,7 @@ body.light-mode #searchBar:focus {
 }
 
 .About {
-    height: 25vh;
+    height: 20vh;
     width: 100%;
     color: #FFFFFF;
     padding: 50px 5%;
@@ -1264,9 +1264,9 @@ body.light-mode #searchBar:focus {
     margin-bottom: 0;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
     .About {
-        height: 28vh;
+        height: 29vh;
     }
 
     .About h1 {
