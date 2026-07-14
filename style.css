@@ -210,7 +210,7 @@ body.light-mode .search-box input {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: 95%;
     margin: 40px auto;
     padding: 0 24px;
 }
@@ -635,7 +635,7 @@ body.light-mode .abstract-pillar::before {
     border-radius: 16px;
     border: 1px solid var(--dark-gray);
     width: 100%;
-    max-width: 550px;
+    max-width: 650px;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
 
@@ -1074,6 +1074,7 @@ body.light-mode .navbar {
     background: rgba(255, 255, 255, 0.08);
     box-shadow: 0 0 15px rgba(138, 87, 232, 0.2);
 }
+
 /* Light Mode support override stability */
 body.light-mode #searchBar {
     background-color: rgba(0, 0, 0, 0.02) !important;
@@ -1285,3 +1286,235 @@ body.light-mode #searchBar:focus {
 }
 
 
+
+/* Desktop standard responsive navigation dashboard rules (NOW TRANSPARENT) */
+.navbar-custom {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 6% !important;
+    /* 🌟 Transparent Background Layer with Glass Effect */
+    background-color: rgba(27, 27, 31, 0.562) !important;
+    -webkit-backdrop-filter: blur(240px) !important;
+    backdrop-filter: blur(20px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 30px !important;
+    z-index: 99999 !important;
+    box-sizing: border-box !important;
+    /* Sleek border matching the transparent look */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+/* Brand Logo Framework Setup (Left Balance) */
+.logo-custom {
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: var(--white, #FFFFFF) !important;
+    letter-spacing: -0.5px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+    flex: 1 !important;
+    /* Left side block fixed constraint */
+}
+
+.logo-custom span {
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* 🎯 100% FIXED ABSOLUTE CENTER FOR LINKS */
+.nav-links-custom-ul {
+    display: flex !important;
+    list-style: none !important;
+    gap: 32px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 3 !important;
+    /* Pure centering hold */
+    text-align: center !important;
+}
+
+.nav-link-custom-item {
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    color: var(--light-gray, #E0DFE3) !important;
+    text-decoration: none !important;
+    position: relative !important;
+    padding: 8px 0 !important;
+    white-space: nowrap !important;
+    transition: color 0.25s ease !important;
+}
+
+/* 🌊 Dynamic Smooth Premium Underline Hover Transition */
+.nav-link-custom-item::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 2px !important;
+    background: linear-gradient(90deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
+    border-radius: 2px !important;
+    transition: width 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+.nav-link-custom-item:hover {
+    color: var(--white, #FFFFFF) !important;
+}
+
+.nav-link-custom-item:hover::after {
+    width: 100% !important;
+}
+
+/* Dynamic Button Panel Layout Align (Right Balance) */
+.dynamic-auth-container {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 20px !important;
+    flex: 1 !important;
+    /* Right side block fixed constraint */
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Hamburger Menu Specs */
+.menu-toggle-custom {
+    display: none !important;
+    font-size: 30px !important;
+    cursor: pointer !important;
+    color: var(--white, #FFFFFF) !important;
+    user-select: none !important;
+}
+
+/* 🔐 PREMIUM MATTE RADIAL GRADIENT BUTTON CODES */
+.nav-custom-btn {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    padding: 10px 22px !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+}
+
+/* Gradient Glowing Action Buttons */
+.btn-create-blog,
+.btn-register-custom {
+    background: linear-gradient(135deg, var(--indigo, #524BC4), var(--purple, #8A57E8)) !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    box-shadow: 0 4px 15px rgba(138, 87, 232, 0.2) !important;
+}
+
+.btn-create-blog:hover,
+.btn-register-custom:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(138, 87, 232, 0.35) !important;
+}
+
+/* Sleek Transparent Active Frame Border Button for Login */
+.btn-login-custom {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--white, #FFFFFF) !important;
+    box-shadow: none !important;
+}
+
+.btn-login-custom:hover {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border-color: var(--purple, #8A57E8) !important;
+    transform: scale(1.05) !important;
+}
+
+/* Solid Danger block for quick logout response */
+.btn-logout-custom {
+    background: #ff4757 !important;
+    color: #FFFFFF !important;
+    border: none !important;
+}
+
+.btn-logout-custom:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3) !important;
+}
+
+.nav-custom-btn:active {
+    transform: translateY(0) !important;
+}
+
+/* 📱 RESPONSIVE ADAPTABILITY MATRIX FOR MOBILE ENGINES */
+@media (max-width: 768px) {
+    .logo-custom {
+        flex: initial !important;
+    }
+
+    .menu-toggle-custom {
+        display: block !important;
+    }
+
+    .nav-links-custom-ul {
+        display: none !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 100% !important;
+        right: 0 !important;
+        width: 60% !important;
+        background-color: #070707 !important;
+        padding: 20px !important;
+        box-sizing: border-box !important;
+        border-bottom: 3px solid var(--purple, #8A57E8) !important;
+        z-index: 99999 !important;
+        gap: 10px !important;
+        align-items: flex-start !important;
+        flex: initial !important;
+        border-radius: 1rem;
+    }
+
+    .nav-links-custom-ul.active-show {
+        display: flex !important;
+    }
+
+    .nav-links-custom-ul li {
+        width: 100% !important;
+        display: block !important;
+    }
+
+    .nav-link-custom-item {
+        display: block !important;
+        padding: 12px 10px !important;
+        font-size: 16px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .nav-link-custom-item::after {
+        display: none !important;
+    }
+
+    .dynamic-auth-container {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 12px !important;
+        padding: 10px !important;
+        width: 100% !important;
+        flex: initial !important;
+    }
+
+    .nav-custom-btn {
+        width: 100% !important;
+        text-align: center !important;
+        margin: 3px;
+    }
+}
