@@ -13,6 +13,10 @@
     --cyan: #4F96C4;
 }
 
+
+*{
+    font-family: 'Courier New', Courier, monospace;
+}
 /* --- ☀️ PREMIUM LIGHT MODE VARIABLE CONFIGURATION --- */
 body.light-mode {
     --pure-black: #F5F5F7;
@@ -170,7 +174,7 @@ body.light-mode .hero-section {
     font-size: 38px;
     font-weight: 800;
     margin-bottom: 10px;
-    background: linear-gradient(135deg, var(--white) 30%, var(--cyan));
+    background: linear-gradient(135deg, var(--white) 40%, var(--indigo));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -1117,7 +1121,6 @@ body.light-mode #searchBar:focus {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
     height: 70%;
     width: 70%;
 }
@@ -1125,9 +1128,26 @@ body.light-mode #searchBar:focus {
 .logo-img {
     height: 5rem;
 }
+.logo-area {
+    text-decoration: none !important; /* Underline hatane ke liye */
+    color: #ffffff !important;         /* Blue color hatakar white karne ke liye */
+}
+
+/* Hover karne par bhi blue ya underline na aaye uske liye: */
+.logo-area:hover {
+    text-decoration: none !important;
+    color: #ffffff !important;
+}
+
+body.light-mode .portal-name{
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+    color: #242323;
+}
 
 .footer-heading {
-    font-size: 0.8rem;
+    font-size: 1rem;
     letter-spacing: 0.08em;
     margin-bottom: 24px;
 }
@@ -1254,7 +1274,7 @@ body.light-mode #searchBar:focus {
     font-size: 38px;
     font-weight: 800;
     margin-bottom: 10px;
-    background: linear-gradient(135deg, var(--white) 30%, var(--cyan));
+    background: linear-gradient(135deg, var(--white) 35%, var(--indigo));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -1287,6 +1307,11 @@ body.light-mode #searchBar:focus {
 }
 
 
+body.light-mode .site-footer{
+    background: #ffffff;
+}
+
+
 
 /* Desktop standard responsive navigation dashboard rules (NOW TRANSPARENT) */
 .navbar-custom {
@@ -1308,6 +1333,10 @@ body.light-mode #searchBar:focus {
     /* Sleek border matching the transparent look */
     border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
+}
+
+body.light-mode .navbar-custom{
+    background: rgba(157, 157, 161, 0.404) !important; 
 }
 
 /* Brand Logo Framework Setup (Left Balance) */
@@ -1455,6 +1484,9 @@ body.light-mode #searchBar:focus {
 .nav-custom-btn:active {
     transform: translateY(0) !important;
 }
+body.light-mode .nav-links-custom-ul{
+        background: #ffffffe5 !important;
+    }
 
 /* 📱 RESPONSIVE ADAPTABILITY MATRIX FOR MOBILE ENGINES */
 @media (max-width: 768px) {
@@ -1483,6 +1515,8 @@ body.light-mode #searchBar:focus {
         flex: initial !important;
         border-radius: 1rem;
     }
+
+    
 
     .nav-links-custom-ul.active-show {
         display: flex !important;
