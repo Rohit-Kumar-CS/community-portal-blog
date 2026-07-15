@@ -754,7 +754,7 @@ body.light-mode .modal-box .ql-toolbar.ql-snow {
 
 .full-blog {
     background: var(--charcoal);
-    padding: 45px;
+    padding: 25px;
     border-radius: 20px;
     border: 1px solid rgba(72, 68, 75, 0.4);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
@@ -802,6 +802,7 @@ body.light-mode .full-blog img {
     font-size: 16px;
     line-height: 1.6;
     overflow: hidden;
+    color: white;
     /* Balanced paragraph rendering line height reset */
     color: var(--light-gray);
     /* margin-bottom: 16px; */
