@@ -1336,7 +1336,7 @@ body.light-mode .site-footer{
 }
 
 body.light-mode .navbar-custom{
-    background: rgba(157, 157, 161, 0.404) !important; 
+    background: rgb(255, 255, 255) !important; 
 }
 
 /* Brand Logo Framework Setup (Left Balance) */
@@ -1485,9 +1485,11 @@ body.light-mode .navbar-custom{
     transform: translateY(0) !important;
 }
 body.light-mode .nav-links-custom-ul{
-        background: #ffffffe5 !important;
+        background: rgb(255, 255, 255) !important;
     }
 
+
+    
 /* 📱 RESPONSIVE ADAPTABILITY MATRIX FOR MOBILE ENGINES */
 @media (max-width: 768px) {
     .logo-custom {
