@@ -117,16 +117,16 @@ function displayBlogs(blogsArray) {
                 <div class="blog-card-overlay">
                     <h2 class="blog-card-title">
                         ${blog.title} 
-                        <span class="verified-badge">✓</span>
-                    </h2>
-                    <p class="blog-card-text">${cleanText.substring(0, 75)}...</p>
-                    <div class="blog-meta">
-                        <span>By ${blog.author || 'Anonymous'}</span>
+                        </h2>
+                        <p class="blog-card-text">${cleanText.substring(0, 75)}...</p>
+                        <div class="blog-meta">
+                        
                         <span>${blog.date}</span>
-                    </div>
-                </div>
-            </a>
-        `;
+                        </div>
+                        </div>
+                        </a>
+                        `;//   <span>By ${currentUserName}</span> 
+                        // <span class="verified-badge">✓</span>
         blogGrid.appendChild(card);
     });
 }

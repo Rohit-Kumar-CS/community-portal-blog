@@ -148,14 +148,14 @@
                     fullBlogContent.innerHTML = `
                 <h1 class="detail-title">${blog.title}</h1>
                 <div class="detail-meta">
-                    // <span>By <strong>${blog.author}</strong></span> | 
+                    
                     <span>Published on ${blog.date}</span>
                 </div>
                 <img src="${blog.image}" alt="${blog.title}" class="detail-img">
                 <div class="detail-text">
                     ${formattedContent}
                 </div>
-            `;
+            `; // <span>By <strong>${blog.user?.name}</strong></span> |
                 } else {
                     fullBlogContent.innerHTML = `<h2>Blog not found!</h2><a href="index.html">Back to Home</a>`;
                 }
